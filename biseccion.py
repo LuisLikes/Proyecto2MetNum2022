@@ -16,14 +16,15 @@ x_b = float(input("Introduce el valor de límite superior: "))
 
 #Realizamos el ciclo para que el programa se repita hasta encontrar la raíz
 
-def bisection(fun, x_a, x_b, eps=None, steps=10):
+def bisection(fun, x_a, x_b, tol=None, iteraciones=10):
 
-    if eps is not None:
-        steps = math.ceil(math.log((x_b - x_a) / eps) / math.log(2))
+    if tol is not None:
+
+        iteraciones = math.ceil(math.log((x_b - x_a) / tol) / math.log(2))
     
     # Ciclo para realizar el método de la bisección
 
-    for n in range(steps + 1):
+    for n in range(iteraciones + 1):
         
         x_r = (x_a + x_b) / 2
         
