@@ -4,44 +4,41 @@
 
 #Importamos las librerías necesarias
 import math
-from re import X
-import numpy as np
 import matplotlib.pyplot as plt
 
-#Definimos la función que vamos a utilizar
+#Subimos la gráfica de la función
+
+#Establecemos la función y el intervalo de búsqueda
 
 f = lambda x: -0.5*x**2 + 2.5*x + 4.5
+x_a = float(input("Introduce el valor del límite inferior: "))
+x_b = float(input("Introduce el valor de límite superior: "))
 
-#Importamos la gráfica de la función
+#Realizamos el ciclo para que el programa se repita hasta encontrar la raíz
 
-plt.plot(np.linspace(-5,5,100),f(np.linspace(-5,5,100)))
-plt.show()
+def bisection(fun, x_a, x_b, eps=None, steps=10):
 
-#Introducimos los valores iniciales y la tolerancia
-
-print("Una vez vista la gráfica, introduzca los valores iniciales.")
-a = float(input("Introduce el valor inicial del límite inferior: "))
-b = float(input("Introduce el valor inicial del límite superior: "))
-tol = 0.01
-
-#Ciclo que realiza el cálculo de la raíz
-
-#Calculamos el error
-
-error = abs(b-a)
-
-while error > tol:
+    if eps is not None:
+        steps = math.ceil(math.log((x_b - x_a) / eps) / math.log(2))
     
-    #Calculamos el punto medio
+    # Ciclo para realizar el método de la bisección
 
-    x = lambda a,b: (a+b)/2
+    for n in range(steps + 1):
+        
+        x_r = (x_a + x_b) / 2
+        
+        if f(x_r) == 0:
+            return x_r
+        
+        if f(x_a) * f(x_r) < 0:
+            x_b = x_r
+            
+        else:
+            x_a = x_r
+    
+    return x_r
 
-    if f(a)*f(x) < 0:
-        b = x
-    else:
-        a = x
-
-
+print("La raíz es: ", bisection(f, x_a, x_b))
 
 
 
