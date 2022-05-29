@@ -41,9 +41,8 @@ n = len(tabla)
 
 #Mostramos la tabla de iteraciones
 
-print(['i', 'x_i', 'x_nuevo', 'error'])
-np.set_printoptions(precision = 4)
+print('i', ' x_i ', ' x_nuevo ', ' error ')
+np.set_printoptions(precision = 4, suppress = True)
 print(tabla)
+
 print('Raíz: ', x_i)
-
-
