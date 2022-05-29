@@ -3,7 +3,6 @@
 #Fecha: 22/05/2022
 
 #Importamos las librerías necesarias
-import math
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -63,5 +62,5 @@ for i in range(0,n,1):
     unafila = formato.format(*unafila)
     print(unafila)
     
-print('raiz: ', raíz)
+print('Raíz: ', raíz)
 

@@ -3,8 +3,6 @@
 #Fecha: 28/05/2022
 
 #Importamos las librerías necesarias
-import imp
-import math
 import matplotlib.pyplot as plt
 import numpy as np
 import sympy as sp
@@ -13,41 +11,39 @@ import sympy as sp
 
 #Establecemos la función y el intervalo de búsqueda
 
-x = sp.Symbol('x')
-f = x**3 + 2*x - 5
-fx = lambda x: x**3 + 2*x - 5
+dx = sp.Symbol('x') #Symbol es una función de Sympy que permite crear variables
+f = lambda x: x**3 + 2*x - 5
 x_0 = float(input("Introduce el valor inicial: "))
 tol = 0.01
 
 #Derivamos la función usando librerías de Python
 
-df = f.diff(x)
-dfx = lambda x: df
-print(df)
-
+df = sp.diff(f(dx),dx) #Diff es una función de Sympy que permite derivar una función
+dfx = sp.lambdify(dx,df) #Lambdify es una función de Sympy que permite evaluar una función tal como hace Lambda en Numpy
 #Valores iniciales de la tabla de iteraciones
 
+i = 1
 tabla_iteraciones = []
 tramo = abs(2*tol)
 x_i = x_0
 
 #Realizamos el ciclo para que el programa se repita hasta encontrar la raíz
 
-while (tramo>=tol):
-    xnuevo = xi - fx(xi)/dfx(xi)
-    tramo  = abs(xnuevo-xi)
-    tabla_iteraciones.append([xi,xnuevo,tramo])
-    xi = xnuevo
+while (tramo>tol):
+    x_nuevo = x_i - f(x_i)/dfx(x_i)
+    tramo  = abs(x_nuevo-x_i)
+    tabla_iteraciones.append([i,x_i,x_nuevo,tramo])
+    x_i = x_nuevo
+    i = i + 1
 
 tabla = np.array(tabla_iteraciones)
 n = len(tabla)
 
 #Mostramos la tabla de iteraciones
 
-print(['xi', 'xnuevo', 'tramo'])
+print(['i', 'x_i', 'x_nuevo', 'error'])
 np.set_printoptions(precision = 4)
 print(tabla)
-print('raiz en: ', xi)
-print('con error de: ',tramo)
+print('Raíz: ', x_i)
 
 
