@@ -8,9 +8,20 @@ import matplotlib.pyplot as plt
 
 #Subimos la gráfica de la función
 
+#El usuario introduce la función
+
+c1 = float(input("Introduce el valor del primer coeficiente: "))
+e1 = float(input("Introduce el valor del primer exponente: "))
+
+c2 = float(input("Introduce el valor del segundo coeficiente: "))
+e2 = float(input("Introduce el valor del segundo exponente: "))
+
+c3 = float(input("Introduce el valor del tercer coeficiente: "))
+e3 = float(input("Introduce el valor del tercer exponente: "))
+
 #Establecemos la función y el intervalo de búsqueda junto con la tolerancia
 
-f = lambda x: -0.5*x**2 + 2.5*x + 4.5
+f = lambda x: c1*x**e1 + c2*x**e2 + c3*x**e3
 x_a = float(input("Introduce el valor del límite inferior: "))
 x_b = float(input("Introduce el valor de límite superior: "))
 tol = 0.01
