@@ -26,6 +26,11 @@ x_a = float(input("Introduce el valor del límite inferior: "))
 x_b = float(input("Introduce el valor de límite superior: "))
 tol = 0.01
 
+
+#Muestra la función establecida por el usuario
+
+print("La función es: ",f)
+
 #Realizamos los procesos iniciales antes de la búsqueda
 
 intervalo = x_b - x_a #Representa el intervalo de búsqueda entre los límites

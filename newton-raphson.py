@@ -30,7 +30,15 @@ tol = 0.01
 #Derivamos la función usando librerías de Python
 
 df = sp.diff(f(dx),dx) #Diff es una función de Sympy que permite derivar una función
-dfx = sp.lambdify(dx,df) #Lambdify es una función de Sympy que permite evaluar una función tal como hace Lambda en Numpy
+dfx = sp.lambdify(dx,df) 
+#Lambdify es una función de Sympy que permite evaluar una función tal como hace Lambda en Numpy
+
+
+#Muestra la función establecida por el usuario y su derivada
+
+print("La función es: ",f)
+print("La derivada de la función es: ", df)
+
 #Valores iniciales de la tabla de iteraciones
 
 i = 1
