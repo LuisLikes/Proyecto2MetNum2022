@@ -9,17 +9,36 @@ import sympy as sp
 
 #Subimos la gráfica de la función
 
+#El usuario introduce la función
+
+c1 = float(input("Introduce el valor del primer coeficiente: "))
+e1 = float(input("Introduce el valor del primer exponente: "))
+
+c2 = float(input("Introduce el valor del segundo coeficiente: "))
+e2 = float(input("Introduce el valor del segundo exponente: "))
+
+c3 = float(input("Introduce el valor del tercer coeficiente: "))
+e3 = float(input("Introduce el valor del tercer exponente: "))
+
 #Establecemos la función y el intervalo de búsqueda
 
 dx = sp.Symbol('x') #Symbol es una función de Sympy que permite crear variables
-f = lambda x: x**3 + 2*x - 5
+f = lambda x: c1*x**e1 + c2*x**e2 + c3*x**e3
 x_0 = float(input("Introduce el valor inicial: "))
 tol = 0.01
 
 #Derivamos la función usando librerías de Python
 
 df = sp.diff(f(dx),dx) #Diff es una función de Sympy que permite derivar una función
-dfx = sp.lambdify(dx,df) #Lambdify es una función de Sympy que permite evaluar una función tal como hace Lambda en Numpy
+dfx = sp.lambdify(dx,df) 
+#Lambdify es una función de Sympy que permite evaluar una función tal como hace Lambda en Numpy
+
+
+#Muestra la función establecida por el usuario y su derivada
+
+print("La función es: ",f)
+print("La derivada de la función es: ", df)
+
 #Valores iniciales de la tabla de iteraciones
 
 i = 1
