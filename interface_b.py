@@ -13,7 +13,7 @@ from matplotlib.pyplot import text
 from tkinter import messagebox
 import PIL.Image
 import PIL.ImageTk
-from numpy import bitwise_xor
+from numpy import bitwise_xor, place
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
@@ -41,8 +41,8 @@ def tab2():
             bisec.title("Bisección Gay")
             bisec.geometry("700x550")
             bisec.config(background="#272635")
-            encabezado = Label(bisec, text="Introduce valores en la ecuación", fg="#A6A6A8", bg="#272635",
-                               font=("Berlin Sans FB Demi", 20)).place(x=150, y=20)
+            encabezado = Label(bisec, text="Resultados", fg="#A6A6A8", bg="#272635",
+                               font=("Berlin Sans FB Demi", 20)).place(x=230, y=20)
             limSup_string = limSup.get()
             x_b = int(limSup_string)
             limInf_string = limInf.get()
@@ -91,16 +91,21 @@ def tab2():
 
             np.set_printoptions(precision=4)
             descrip = Label(
-                bisec, text=' i       inf         sup          raíz         evinf          evsup          evraíz          error', fg="#A6A6A8", bg="#272635",
+                bisec, text='   i     inf       sup          raíz        evinf      evsup      evraíz     error', fg="#A6A6A8", bg="#272635",
                 font=("Berlin Sans FB Demi", 16)).place(x=30, y=60)
             n = len(tabla_iteraciones)
+            m = 100
             for i in range(0, n, 1):
                 unafila = tabla_iteraciones[i]
-                formato = '{:.0f}'+'   '+(len(unafila)-1)*'{:.3f} '
+                formato = '{:.0f}'+'   '+(len(unafila)-1)*'  {:.3f} '
                 unafila = formato.format(*unafila)
-                unafila_lab = Label(bisec, text=(unafila, "   "), fg="#A6A6A8", bg="#272635",
-                                    font=("Berlin Sans FB Demi", 16)).place(x=10, y=20+50)
-
+                unafila_lab = Label(bisec, text=unafila, fg="#A6A6A8", bg="#272635",
+                                    font=("Berlin Sans FB Demi", 16)).place(x=40, y=m)
+                m = 40 + m
+            raiz_label = Label(bisec, text="Raíz: ", fg="#A6A6A8", bg="#272635",
+                               font=("Berlin Sans FB Demi", 16)).place(x=40, y=m)
+            raiz_result = Label(bisec, text=raíz, fg="#A6A6A8", bg="#272635",
+                                font=("Berlin Sans FB Demi", 16)).place(x=100, y=m)
             print('Raíz: ', raíz)
 
         x = np.linspace(-10, 10, 100)
@@ -205,12 +210,6 @@ def tab1():
 
     binary_button = Button(bisec, text="Empezar", fg="#FFFFFF", bg="#4D5393", font=("Berlin Sans FB Demi", 13),
                            height=2, width=11, command=tab2).place(x=295, y=340)
-
-    """ingresar_numero = Label(bisec, text="Valor límite inferior", fg="#E4572E", bg="#29335C",
-                            font=("Berlin Sans FB Demi", 10)).place(x=60, y=80)
-    dato = StringVar()
-    numero_entry = Entry(bisec, textvariable=dato,
-                        justify="center").place(x=60, y=110) """
 
 
 tab1()
