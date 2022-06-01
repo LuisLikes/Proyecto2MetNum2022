@@ -1,4 +1,5 @@
 from doctest import master
+from tokenize import String
 import numpy as np
 from cProfile import label
 from ctypes import alignment
@@ -31,11 +32,30 @@ def deleteTab():
     bisec.destroy()
 
 
+def tab3():
+
+
 def tab2():
     def calcGraf():
         x = np.linspace(-10, 10, 100)
-        y = -0.5*x**2+2.5*x+4.5
-        fig = plt.figure(figsize=(5, 4), dpi=100)
+
+        x2data_string = x2data.get()
+        x2data_num = float(x2data_string)
+        exp2data_string = exp2data.get()
+        exp2data_num = float(exp2data_string)
+
+        x1data_string = x1data.get()
+        x1data_num = float(x1data_string)
+        exp1data_string = exp1data.get()
+        exp1data_num = float(exp1data_string)
+        xdata_string = xdata.get()
+        xdata_num = float(xdata_string)
+        expdata_string = expdata.get()
+        expdata_num = float(expdata_string)
+
+        y = x2data_num*x**exp2data_num+x1data_num * \
+            x**exp1data_num+xdata_num*x**expdata_num
+        fig = plt.figure(figsize=(4, 3), dpi=100)
         ax = fig.add_subplot(111)
         ax.spines['left'].set_position('center')
         ax.spines['bottom'].set_position('zero')
@@ -44,6 +64,23 @@ def tab2():
         ax = plt.plot(x, y, 'r')
         ax = FigureCanvasTkAgg(fig, master=bisec)
         ax.get_tk_widget().place(x=30, y=200)
+        # Introducir límite superior
+        label_limSup = Label(
+            bisec, text="Límite Superior:", fg="#A6A6A8", bg="#272635",
+            font=("Berlin Sans FB Demi", 16)).place(x=450, y=250)
+        limSup = StringVar()
+        entry_limSup = Entry(width=5, textvariable=limSup, font=(
+            "Berlin Sans FB Demi", 10)).place(x=610, y=255)
+
+        # Introducir límite inferior
+        label_limInf = Label(
+            bisec, text="Límite Inferior:", fg="#A6A6A8", bg="#272635",
+            font=("Berlin Sans FB Demi", 16)).place(x=460, y=310)
+        limInf = StringVar()
+        entry_limInf = Entry(width=5, textvariable=limInf, font=(
+            "Berlin Sans FB Demi", 10)).place(x=610, y=315)
+        resultado = Button(bisec, text="Resultado", fg="#FFFFFF", bg="#FFB949", font=("Berlin Sans FB Demi", 10),
+                           height=2, width=11, command=calcGraf).place(x=510, y=400)
 
     deleteTab()
     bisec = Tk()
@@ -51,7 +88,7 @@ def tab2():
     bisec.geometry("700x550")
     bisec.config(background="#272635")
     encabezado = Label(bisec, text="Introduce valores en la ecuación", fg="#A6A6A8", bg="#272635",
-                       font=("Berlin Sans FB Demi", 20)).place(x=150, y=20)  # 50
+                       font=("Berlin Sans FB Demi", 20)).place(x=150, y=20)
 
     # Ecuación
 
@@ -70,21 +107,22 @@ def tab2():
     x1data = StringVar()
     valorx1 = Entry(width=2, textvariable=x1data, font=(
         "Berlin Sans FB Demi", 17)).place(x=325, y=89)
-    x1data = Label(bisec, text="X +", fg="#A6A6A8", bg="#272635",
-                   font=("Berlin Sans FB Demi", 20)).place(x=355, y=89)
+    x1 = Label(bisec, text="X +", fg="#A6A6A8", bg="#272635",
+               font=("Berlin Sans FB Demi", 20)).place(x=355, y=89)
     # exponente de x1
     exp1data = StringVar()
     exponentex1 = Entry(width=2, textvariable=exp1data, font=(
         "Berlin Sans FB Demi", 10)).place(x=375, y=70)
 
     # dato de último término
-    valor = Entry(width=2, font=(
+    xdata = StringVar()
+    valorx = Entry(width=2, textvariable=xdata, font=(
         "Berlin Sans FB Demi", 17)).place(x=400, y=89)
-    xdata = Label(bisec, text="X", fg="#A6A6A8", bg="#272635",
-                  font=("Berlin Sans FB Demi", 20)).place(x=430, y=89)
+    x = Label(bisec, text="X", fg="#A6A6A8", bg="#272635",
+              font=("Berlin Sans FB Demi", 20)).place(x=430, y=89)
     # exponente de x
     expdata = StringVar()
-    exponentex = Entry(width=2, textvariable=exp1data, font=(
+    exponentex = Entry(width=2, textvariable=expdata, font=(
         "Berlin Sans FB Demi", 10)).place(x=450, y=70)
 
     vergráfico = Button(bisec, text="Ver gráfico", fg="#FFFFFF", bg="#E4572E", font=("Berlin Sans FB Demi", 10),
