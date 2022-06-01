@@ -1,3 +1,5 @@
+from bisect import bisect
+from distutils.command.config import LANG_EXT
 from doctest import master
 from tokenize import String
 import numpy as np
@@ -32,11 +34,75 @@ def deleteTab():
     bisec.destroy()
 
 
-def tab3():
-
-
 def tab2():
     def calcGraf():
+        def tab3():
+            bisec = Tk()
+            bisec.title("Bisección Gay")
+            bisec.geometry("700x550")
+            bisec.config(background="#272635")
+            encabezado = Label(bisec, text="Introduce valores en la ecuación", fg="#A6A6A8", bg="#272635",
+                               font=("Berlin Sans FB Demi", 20)).place(x=150, y=20)
+            limSup_string = limSup.get()
+            x_b = int(limSup_string)
+            limInf_string = limInf.get()
+            x_a = int(limInf_string)
+            tol = 0.01
+
+            # Muestra la función establecida por el usuario
+
+            # Realizamos los procesos iniciales antes de la búsqueda
+
+            intervalo = x_b - x_a  # Representa el intervalo de búsqueda entre los límites
+            # Entre más pequeño sea el intervalo, más precisa será la raíz
+            fa = f(x_a)
+            fb = f(x_b)
+            i = 1
+            tabla_iteraciones = []
+
+            # Ciclo que realiza la búsqueda de la raíz
+
+            while (intervalo > tol):
+
+                x_r = (x_a + x_b) / 2
+                fx = f(x_r)
+                tabla_iteraciones.append(
+                    [i, x_a, x_b, x_r, fa, fb, fx, intervalo])
+                i = i + 1
+
+                # Determina si debemos seguir buscando en el límite inferior o superior con el signo
+                nuevo = np.sign(fa)*np.sign(fx)
+
+                if (nuevo > 0):
+                    x_a = x_r
+                    fa = fx
+                    intervalo = x_b - x_a
+                if (nuevo < 0):
+                    x_b = x_r
+                    fb = fx
+                    intervalo = x_b - x_a
+
+            x_r = (x_a + x_b) / 2
+            fx = f(x_r)
+            tabla_iteraciones.append([i, x_a, x_b, x_r, fa, fb, fx, intervalo])
+            raíz = x_r
+
+            # Mostramos la tabla de iteraciones
+
+            np.set_printoptions(precision=4)
+            descrip = Label(
+                bisec, text=' i       inf         sup          raíz         evinf          evsup          evraíz          error', fg="#A6A6A8", bg="#272635",
+                font=("Berlin Sans FB Demi", 16)).place(x=30, y=60)
+            n = len(tabla_iteraciones)
+            for i in range(0, n, 1):
+                unafila = tabla_iteraciones[i]
+                formato = '{:.0f}'+'   '+(len(unafila)-1)*'{:.3f} '
+                unafila = formato.format(*unafila)
+                unafila_lab = Label(bisec, text=(unafila, "   "), fg="#A6A6A8", bg="#272635",
+                                    font=("Berlin Sans FB Demi", 16)).place(x=10, y=20+50)
+
+            print('Raíz: ', raíz)
+
         x = np.linspace(-10, 10, 100)
 
         x2data_string = x2data.get()
@@ -53,7 +119,7 @@ def tab2():
         expdata_string = expdata.get()
         expdata_num = float(expdata_string)
 
-        y = x2data_num*x**exp2data_num+x1data_num * \
+        def f(x): return x2data_num*x**exp2data_num+x1data_num * \
             x**exp1data_num+xdata_num*x**expdata_num
         fig = plt.figure(figsize=(4, 3), dpi=100)
         ax = fig.add_subplot(111)
@@ -61,7 +127,7 @@ def tab2():
         ax.spines['bottom'].set_position('zero')
         ax.spines['right'].set_color('none')
         ax.spines['top'].set_color('none')
-        ax = plt.plot(x, y, 'r')
+        ax = plt.plot(x, f(x), 'r')
         ax = FigureCanvasTkAgg(fig, master=bisec)
         ax.get_tk_widget().place(x=30, y=200)
         # Introducir límite superior
@@ -80,7 +146,7 @@ def tab2():
         entry_limInf = Entry(width=5, textvariable=limInf, font=(
             "Berlin Sans FB Demi", 10)).place(x=610, y=315)
         resultado = Button(bisec, text="Resultado", fg="#FFFFFF", bg="#FFB949", font=("Berlin Sans FB Demi", 10),
-                           height=2, width=11, command=calcGraf).place(x=510, y=400)
+                           height=2, width=11, command=tab3).place(x=510, y=400)
 
     deleteTab()
     bisec = Tk()
