@@ -24,7 +24,6 @@ e3 = float(input("Introduce el valor del tercer exponente: "))
 
 dx = sp.Symbol('x') #Symbol es una función de Sympy que permite crear variables
 f = lambda x: c1*x**e1 + c2*x**e2 + c3*x**e3
-fx = c1*dx**e1 + c2*dx**e2 + c3*dx**e3
 x_0 = float(input("Introduce el valor inicial: "))
 tol = 0.01
 
@@ -33,12 +32,6 @@ tol = 0.01
 df = sp.diff(f(dx),dx) #Diff es una función de Sympy que permite derivar una función
 dfx = sp.lambdify(dx,df) 
 #Lambdify es una función de Sympy que permite evaluar una función tal como hace Lambda en Numpy
-
-
-#Muestra la función establecida por el usuario y su derivada
-
-print("La función es: ",fx)
-print("La derivada de la función es: ", df)
 
 #Valores iniciales de la tabla de iteraciones
 
