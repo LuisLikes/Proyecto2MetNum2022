@@ -209,7 +209,7 @@ def newt():
             bisec.geometry("700x550")
             bisec.config(background="#272635")
             encabezado = Label(bisec, text="Resultados", fg="#A6A6A8", bg="#272635",
-                               font=("Berlin Sans FB Demi", 20)).place(x=230, y=20)
+                               font=("Berlin Sans FB Demi", 20)).place(x=300, y=20)
             valInc_string = valInc.get()
             x_0 = int(valInc_string)
             tol = 0.01
@@ -243,17 +243,16 @@ def newt():
             n = len(tabla)
 
             # Mostramos la tabla de iteraciones
-            title_label = Label(bisec, text='i  x_i  x_nuevo   error ', fg="#A6A6A8", bg="#272635",
-                                font=("Berlin Sans FB Demi", 16)).place(x=30, y=60)
+            title_label = Label(bisec, text='i   x_i   x_nuevo   error ', fg="#A6A6A8", bg="#272635",
+                                font=("Berlin Sans FB Demi", 16)).place(x=90, y=60)
             np.set_printoptions(precision=4, suppress=True)
-            print(tabla)
-
-            print('Raíz: ', x_i)
+            table_label = Label(bisec, text=tabla, fg="#A6A6A8", bg="#272635",
+                                font=("Berlin Sans FB Demi", 16)).place(x=60, y=100)
 
             raiz_label = Label(bisec, text="Raíz: ", fg="#A6A6A8", bg="#272635",
-                               font=("Berlin Sans FB Demi", 16)).place(x=40, y=m)
-            raiz_result = Label(bisec, text=raíz, fg="#A6A6A8", bg="#272635",
-                                font=("Berlin Sans FB Demi", 16)).place(x=100, y=m)
+                               font=("Berlin Sans FB Demi", 16)).place(x=400, y=60)
+            raiz_result = Label(bisec, text=x_i, fg="#A6A6A8", bg="#272635",
+                                font=("Berlin Sans FB Demi", 16)).place(x=460, y=60)
 
         x = np.linspace(-10, 10, 100)
 
